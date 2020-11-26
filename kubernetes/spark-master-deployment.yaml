@@ -15,7 +15,7 @@ spec:
       containers:
         - name: spark-master
           image: spark-hadoop:2.2.1
-          #command: ["/spark-master"]
+          command: ["./definer-master.sh"]
           ports:
             - containerPort: 7077
             - containerPort: 8080
