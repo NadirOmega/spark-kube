@@ -2,8 +2,9 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: spark-worker
+  namespace: kube-spark
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       component: spark-worker
