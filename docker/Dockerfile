@@ -12,27 +12,22 @@ RUN mkdir -p /spark-nad && \
     cd /spark-nad && curl http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | \
         tar -zx hadoop-${HADOOP_VERSION}/lib/native && \
     ln -s hadoop-${HADOOP_VERSION} hadoop && \
-    echo Hadoop OK && \ 
-     #Begin spark install 
-    curl http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz | \
-    tar -zx && \
-    ln -s spark-${SPARK_VERSION}-bin-hadoop2.7 spark && \
-    echo Spark OK
+    echo Hadoop OK && 
 
-#OLD when using two layers
+
 # download and install spark
-#RUN mkdir -p /spark-nad && \
-#    cd /spark-nad && \
-#    curl http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz | \
-#        tar -zx && \
-#    ln -s spark-${SPARK_VERSION}-bin-hadoop2.7 spark && \
-#    echo Spark OK
+RUN mkdir -p /spark-nad && \
+    cd /spark-nad && \
+    curl http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz | \
+       tar -zx && \
+    ln -s spark-${SPARK_VERSION}-bin-hadoop2.7 spark && \
+   echo Spark OK
 
 
 #Add spark default env 
 ENV PATH $PATH:/spark-nad/spark/bin
 # add scripts and update spark default config
 ADD common.sh spark-master spark-worker /
-# We have to  add a spark-default cfg 
+# We havemust add a spark-default cfg 
 ADD spark-defaults.conf /spark-nad/spark/conf/spark-defaults.conf
 
